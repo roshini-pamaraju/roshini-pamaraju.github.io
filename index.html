@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Roshini Pamaraju — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #1B4F72;
+  --blue: #2E86C1;
+  --blue-light: #AED6F1;
+  --glow: rgba(46,134,193,0.18);
+  --ink: #0f1724;
+  --mid: #4a5568;
+  --muted: #8896a8;
+  --bg: #06101c;
+  --card: #0d1f30;
+  --card2: #112233;
+  --border: rgba(174,214,241,0.12);
+  --border2: rgba(174,214,241,0.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#e8f0f8;line-height:1.6;overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6vw;height:60px;
+  background:rgba(6,16,28,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s;
+}
+.nav-logo{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.88rem;color:var(--blue-light);letter-spacing:.08em;
+}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{
+  font-size:.78rem;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);
+  text-decoration:none;transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--blue);transform:scaleX(0);transition:transform .2s;
+}
+.nav-links a:hover{color:var(--blue-light);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{
+  padding:.45rem 1.1rem;border-radius:5px;
+  background:var(--blue);color:#fff;
+  font-size:.78rem;font-weight:600;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--navy);}
+
+/* CURSOR GLOW */
+.cursor-glow{
+  position:fixed;pointer-events:none;z-index:0;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(46,134,193,0.06) 0%,transparent 70%);
+  transform:translate(-50%,-50%);
+  transition:left .1s,top .1s;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:100px 6vw 60px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;width:100%;}
+.hero-bg-lines{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  opacity:.04;
+}
+.hero-bg-lines svg{width:100%;height:100%;}
+
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;color:var(--blue);letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--blue);}
+.dot-pulse{
+  width:8px;height:8px;border-radius:50%;background:#22c55e;
+  animation:pulse 2s infinite;display:inline-block;margin-left:.3rem;
+}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4);}50%{opacity:.8;box-shadow:0 0 0 6px rgba(34,197,94,0);}}
+
+h1.hero-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.6rem,5.5vw,4.4rem);
+  line-height:1.05;color:#e8f0f8;
+  margin-bottom:.5rem;
+}
+h1.hero-name em{font-style:italic;color:var(--blue);}
+.hero-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;color:var(--blue-light);
+  letter-spacing:.04em;margin-bottom:1.2rem;
+}
+.hero-sub{
+  font-size:1rem;color:var(--muted);
+  max-width:520px;line-height:1.8;margin-bottom:2rem;
+}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.65rem 1.4rem;border-radius:6px;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  text-decoration:none;transition:all .2s;border:none;cursor:pointer;
+}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{background:#1a6fa8;transform:translateY(-1px);box-shadow:0 8px 24px rgba(46,134,193,.35);}
+.btn-ghost{background:transparent;color:var(--blue-light);border:1px solid var(--border2);}
+.btn-ghost:hover{background:rgba(46,134,193,.1);border-color:var(--blue);}
+
+/* Animated tag strip */
+.tag-strip{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;padding:.28rem .7rem;border-radius:4px;
+  background:rgba(46,134,193,.08);
+  border:1px solid rgba(46,134,193,.2);
+  color:var(--blue-light);
+  transition:all .2s;cursor:default;
+}
+.tag:hover{background:rgba(46,134,193,.18);border-color:var(--blue);transform:translateY(-2px);}
+
+/* HERO RIGHT — terminal card */
+.terminal{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.terminal-bar{
+  background:#0a1929;
+  padding:.7rem 1rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.t-dot{width:12px;height:12px;border-radius:50%;}
+.t-red{background:#ff5f57;} .t-yellow{background:#febc2e;} .t-green{background:#28c840;}
+.t-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);margin-left:auto;}
+.terminal-body{padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.9;}
+.t-line{display:flex;gap:.6rem;}
+.t-prompt{color:var(--blue);}
+.t-cmd{color:#e8f0f8;}
+.t-out{color:#22c55e;padding-left:1.1rem;}
+.t-comment{color:var(--muted);}
+.t-cursor{display:inline-block;width:8px;height:14px;background:var(--blue);animation:blink .8s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* SECTION COMMONS */
+section{padding:90px 6vw;}
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;color:var(--blue);letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:.6rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--blue);}
+h2.sec-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  color:#e8f0f8;margin-bottom:3rem;
+}
+
+/* STATS BAR */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  margin-bottom:5rem;
+}
+.stat{
+  background:var(--card);
+  padding:2rem 1.5rem;text-align:center;
+  transition:background .2s;
+}
+.stat:hover{background:var(--card2);}
+.stat-num{
+  font-family:'DM Serif Display',serif;
+  font-size:2.8rem;color:var(--blue);
+  line-height:1;margin-bottom:.3rem;
+}
+.stat-label{font-size:.78rem;color:var(--muted);font-weight:500;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.about-text p{color:var(--muted);line-height:1.85;margin-bottom:1rem;font-size:.95rem;}
+.about-text p strong{color:var(--blue-light);}
+
+/* SKILLS */
+.skills-bg{background:var(--card);}
+.skills-outer{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;}
+.skill-card{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;padding:1.5rem;
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(46,134,193,.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .25s;
+}
+.skill-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.skill-card:hover::before{opacity:1;}
+.skill-icon{font-size:1.8rem;margin-bottom:.8rem;display:block;}
+.skill-cat{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;color:var(--blue);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.skill-tag{
+  font-size:.72rem;padding:.22rem .55rem;
+  background:rgba(46,134,193,.08);
+  border:1px solid rgba(46,134,193,.15);
+  border-radius:3px;color:var(--blue-light);
+}
+
+/* EXPERIENCE — timeline */
+.exp-bg{background:var(--bg);}
+.timeline{position:relative;padding-left:2px;}
+.timeline::before{
+  content:'';position:absolute;left:0;top:12px;bottom:12px;
+  width:1px;background:linear-gradient(to bottom,var(--blue),transparent);
+}
+.exp-item{
+  padding-left:36px;position:relative;margin-bottom:3rem;
+  opacity:0;transform:translateY(20px);transition:all .5s;
+}
+.exp-item.visible{opacity:1;transform:translateY(0);}
+.exp-item::before{
+  content:'';position:absolute;left:-5px;top:8px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--card);border:2px solid var(--blue);
+  transition:background .2s;
+}
+.exp-item.current::before{background:var(--blue);box-shadow:0 0 12px rgba(46,134,193,.6);}
+.exp-period{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;color:var(--blue);letter-spacing:.06em;margin-bottom:.4rem;
+}
+.exp-role{
+  font-family:'DM Serif Display',serif;
+  font-size:1.2rem;color:#e8f0f8;margin-bottom:.15rem;
+}
+.exp-co{font-size:.84rem;font-weight:600;color:var(--muted);margin-bottom:.9rem;}
+.exp-bullets{list-style:none;}
+.exp-bullets li{
+  font-size:.86rem;color:var(--muted);
+  padding-left:1.2rem;position:relative;
+  margin-bottom:.4rem;line-height:1.65;
+}
+.exp-bullets li::before{content:'▪';color:var(--blue);position:absolute;left:0;}
+
+/* PROJECTS */
+.proj-bg{background:var(--card);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;}
+.proj-card{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:12px;padding:1.8rem;
+  transition:all .25s;position:relative;overflow:hidden;
+  cursor:default;
+}
+.proj-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--navy),var(--blue));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.proj-card:hover{border-color:var(--blue);box-shadow:0 16px 48px rgba(0,0,0,.4);transform:translateY(-4px);}
+.proj-card:hover::after{transform:scaleX(1);}
+.proj-num{
+  font-family:'DM Serif Display',serif;
+  font-size:2.8rem;color:rgba(46,134,193,.2);
+  line-height:1;margin-bottom:.5rem;font-style:italic;
+}
+.proj-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;color:#e8f0f8;margin-bottom:.7rem;
+}
+.proj-desc{font-size:.85rem;color:var(--muted);line-height:1.75;margin-bottom:1.1rem;}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.3rem;}
+.proj-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;padding:.18rem .5rem;
+  background:rgba(46,134,193,.08);
+  border:1px solid rgba(46,134,193,.18);
+  color:var(--blue-light);border-radius:3px;
+}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
+.cert-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1.5rem 1.6rem;
+  display:flex;gap:1rem;align-items:flex-start;
+  transition:all .25s;
+}
+.cert-card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(0,0,0,.3);transform:translateY(-2px);}
+.cert-icon{font-size:2rem;flex-shrink:0;}
+.cert-name{font-size:.88rem;font-weight:600;color:#e8f0f8;margin-bottom:.25rem;}
+.cert-issuer{font-size:.75rem;color:var(--muted);}
+
+/* HIGHLIGHTS */
+.hl-bg{
+  background:linear-gradient(135deg,#0d1f30 0%,#091525 100%);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;}
+.hl-card{
+  background:rgba(46,134,193,.06);
+  border:1px solid rgba(46,134,193,.15);
+  border-radius:10px;padding:1.5rem;
+  transition:all .25s;
+}
+.hl-card:hover{background:rgba(46,134,193,.12);border-color:rgba(46,134,193,.35);}
+.hl-icon{font-size:1.4rem;margin-bottom:.7rem;display:block;}
+.hl-card p{font-size:.88rem;color:var(--blue-light);line-height:1.75;}
+
+/* CONTACT */
+.contact-inner{
+  max-width:640px;margin:0 auto;text-align:center;
+}
+.contact-inner h2{margin-bottom:1rem;}
+.contact-inner p{color:var(--muted);margin-bottom:2.5rem;font-size:.95rem;}
+.contact-links{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+.contact-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1rem 1.5rem;
+  display:flex;align-items:center;gap:.6rem;
+  text-decoration:none;color:#e8f0f8;
+  font-size:.85rem;font-weight:500;
+  transition:all .2s;
+}
+.contact-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.contact-card svg{width:16px;height:16px;fill:var(--blue);}
+
+/* FOOTER */
+footer{
+  padding:2rem 6vw;text-align:center;
+  border-top:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--muted);letter-spacing:.04em;
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:all .6s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* PROGRESS BAR */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--navy),var(--blue));
+  z-index:999;transition:width .1s;
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .terminal{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .stats-bar{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="width:0%"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <span class="nav-logo">Roshini Pamaraju</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:pamarajuroshini@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-lines">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#2E86C1" stroke-width="0.5"/></pattern></defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        Open to Generative AI &amp; Agentic AI Roles <span class="dot-pulse"></span>
+      </div>
+      <h1 class="hero-name">Roshini<br/><em>Pamaraju</em></h1>
+      <div class="hero-title">Generative AI &amp; Agentic AI Engineer  ·  Accenture</div>
+      <p class="hero-sub">I build agentic AI systems that think, plan and act autonomously — specialising in LangGraph-based multi-agent orchestration, RAG pipelines, and LLMOps. Open to GenAI and Agentic AI engineering roles.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="https://www.linkedin.com/in/roshini-pamaraju-877a18249/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://github.com/roshini-pamaraju" target="_blank" class="btn btn-ghost">GitHub</a>
+      </div>
+      <div class="tag-strip">
+        <span class="tag">LangGraph</span><span class="tag">RAG</span>
+        <span class="tag">LLMOps</span><span class="tag">Multi-Agent</span>
+        <span class="tag">Azure</span><span class="tag">OpenAI GPT</span>
+        <span class="tag">Claude</span><span class="tag">FastAPI</span>
+        <span class="tag">Docker</span><span class="tag">Python</span>
+      </div>
+    </div>
+
+    <!-- Terminal card -->
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="t-dot t-red"></span>
+        <span class="t-dot t-yellow"></span>
+        <span class="t-dot t-green"></span>
+        <span class="t-title">roshini@accenture ~ ai-stack</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> whoami</span></div>
+        <div class="t-out">Roshini Pamaraju</div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> cat role.txt</span></div>
+        <div class="t-out">AI/ML Analyst @ Accenture</div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> python stack.py</span></div>
+        <div class="t-out">▸ LangGraph + Agentic AI</div>
+        <div class="t-out">▸ RAG + LLMOps pipelines</div>
+        <div class="t-out">▸ Azure cloud deployment</div>
+        <div class="t-out">▸ Multi-agent orchestration</div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> certifications --list</span></div>
+        <div class="t-out">✓ Anthropic CCA-F</div>
+        <div class="t-out">✓ Google Cloud ML Engineer</div>
+        <div class="t-out">✓ Generative AI Leader</div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> <span class="t-cursor"></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="padding:0 6vw 80px;" class="reveal">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num" data-target="2">0</div><div class="stat-label">Years at Accenture</div></div>
+    <div class="stat"><div class="stat-num" data-target="6">0</div><div class="stat-label">AI Prototypes Deployed</div></div>
+    <div class="stat"><div class="stat-num" data-target="3">0</div><div class="stat-label">Certifications</div></div>
+    <div class="stat"><div class="stat-num" data-target="886" data-suffix="%" data-display="8.86">0</div><div class="stat-label">B.Tech CGPA</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="sec-title">Who I Am</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a <strong>Generative AI &amp; Agentic AI engineer at Accenture, Chennai</strong>, building production-grade LLM systems for enterprise clients. My focus is autonomous agent design — systems that reason, plan, retrieve, and act without human intervention in the loop.</p>
+      <p>My core specialisation is <strong>two-tier LangGraph orchestration</strong> — building dispatch graphs that route to specialised agent pipelines, integrating multiple LLMs (Azure OpenAI GPT-4o, Anthropic Claude, Google Gemini) with RAG over Azure AI Search. I also own the full LLMOps lifecycle: prompt engineering, DeepEval quality scoring, guardrail validation, and production-grade async systems with FastAPI, RabbitMQ, and PostgreSQL.</p>
+      <p>I hold certifications from <strong>Anthropic</strong> (Claude Certified Architect) and <strong>Google Cloud</strong> (Professional ML Engineer + Generative AI Leader), and I'm passionate about making GenAI reliable and production-ready at scale.</p>
+    </div>
+    <div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;">Core Focus Areas</div>
+        <div id="focus-bars"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-bg" id="skills">
+  <div class="section-label">Skills</div>
+  <h2 class="sec-title">Technical Expertise</h2>
+  <div class="skills-outer">
+    <div class="skill-card reveal">
+      <span class="skill-icon">🤖</span>
+      <div class="skill-cat">Agentic AI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">LangGraph</span><span class="skill-tag">LangChain</span>
+        <span class="skill-tag">Multi-Agent Orchestration</span><span class="skill-tag">MCP</span>
+        <span class="skill-tag">Conditional State Machines</span><span class="skill-tag">Checkpointing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🧠</span>
+      <div class="skill-cat">LLMs &amp; Models</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Azure OpenAI GPT-4o</span><span class="skill-tag">Anthropic Claude</span>
+        <span class="skill-tag">Google Gemini 2.5 Flash</span><span class="skill-tag">text-embedding-ada-002</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🔍</span>
+      <div class="skill-cat">RAG &amp; Search</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Azure AI Search</span><span class="skill-tag">Vector Embeddings</span>
+        <span class="skill-tag">Document Ingestion</span><span class="skill-tag">URL Scraping</span>
+        <span class="skill-tag">Gemini Grounded Search</span><span class="skill-tag">DuckDuckGo</span>
+        <span class="skill-tag">SEMrush API</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">📊</span>
+      <div class="skill-cat">LLMOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Prompt Engineering</span><span class="skill-tag">Structured Output</span>
+        <span class="skill-tag">DeepEval</span><span class="skill-tag">LLM Guardrails</span>
+        <span class="skill-tag">JSON Schema Validation</span><span class="skill-tag">Model Fallback</span>
+        <span class="skill-tag">Retry Strategies</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚡</span>
+      <div class="skill-cat">Backend &amp; Async</div>
+      <div class="skill-tags">
+        <span class="skill-tag">FastAPI</span><span class="skill-tag">RabbitMQ</span>
+        <span class="skill-tag">asyncio</span><span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">SQLAlchemy</span><span class="skill-tag">Dependency Injector</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">☁️</span>
+      <div class="skill-cat">Cloud &amp; Security</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Azure OpenAI</span><span class="skill-tag">Azure Blob Storage</span>
+        <span class="skill-tag">Azure Key Vault</span><span class="skill-tag">Azure Managed Identity</span>
+        <span class="skill-tag">Google Cloud AI</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-cat">DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker ✦ hands-on</span><span class="skill-tag">Git ✦ hands-on</span>
+        <span class="skill-tag">GitHub ✦ hands-on</span>
+        <span class="skill-tag">Kubernetes ✦ exposure</span>
+        <span class="skill-tag">CI/CD Pipelines ✦ exposure</span>
+        <span class="skill-tag">Helm Charts ✦ exposure</span>
+      </div>
+      <div style="margin-top:.7rem;font-size:.68rem;color:var(--muted);font-style:italic;">Exposure gained via infrastructure team collaboration</div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🐍</span>
+      <div class="skill-cat">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-bg" id="experience">
+  <div class="section-label">Experience</div>
+  <h2 class="sec-title">Career Timeline</h2>
+  <div class="timeline">
+    <div class="exp-item current">
+      <div class="exp-period">June 2026 – Present · Current Role</div>
+      <div class="exp-role">AI/ML Computational Science Analyst</div>
+      <div class="exp-co">Accenture · Chennai, India</div>
+      <ul class="exp-bullets">
+        <li>Designed and deployed a multi-step Invoice Validation agent using LangGraph and Azure Document Intelligence, automating extraction, validation logic, and exception handling end-to-end.</li>
+        <li>Built Docker images for the invoice validation agent and other GenAI microservices, packaging FastAPI-based LLM applications for consistent, reproducible deployment.</li>
+        <li>Own LLMOps lifecycle for deployed agents — prompt engineering, model evaluation, output validation, and performance monitoring across live GenAI applications.</li>
+        <li>Lead end-to-end delivery of ~6 AI prototypes from design through cloud deployment, collaborating with infra teams on CI/CD pipelines, Helm charts, and Azure Portal provisioning.</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">July 2024 – May 2026</div>
+      <div class="exp-role">AI/ML Computational Science Associate</div>
+      <div class="exp-co">Accenture · Chennai, India</div>
+      <ul class="exp-bullets">
+        <li>Built an agentic microservice to auto-generate structured, citation-backed market research reports, replacing manual research workflows by pulling evidence from open web, user-uploaded documents, and keyword data APIs.</li>
+        <li>Designed a two-tier LangGraph orchestration system: a top-level router dispatching across 15+ event types, and per-topic worker graphs with conditional entry points resolving at runtime across Gemini grounded web search, Azure AI Search RAG, URL scraping, and SEMrush data.</li>
+        <li>Implemented LangChain structured output with Pydantic models and a manual ReAct tool-calling loop; each topic graph runs concurrently under asyncio timeout isolation with results streamed incrementally to the UI.</li>
+        <li>Built a downstream enrichment pipeline generating charts across 6 visualization types with JSON schema guardrails, LLM re-prompting on failure, inline text highlights, and footnote extraction mapping citations to source URLs.</li>
+        <li>Integrated inline DeepEval quality scoring per node, full audit trail in PostgreSQL and Azure Blob Storage, and secretless production authentication via Azure Managed Identity.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="proj-bg" id="projects">
+  <div class="section-label">Projects</div>
+  <h2 class="sec-title">What I've Built</h2>
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-title">Two-Tier Agentic Research Report Generator</div>
+      <p class="proj-desc">Enterprise-scale LangGraph microservice — a top-level orchestrator graph routes requests across 15+ executor workflows, while a per-topic sub-graph gathers evidence via RAG, grounded web search, and data APIs to auto-author citation-backed reports with charts and highlights.</p>
+      <div class="proj-stack">
+        <span class="proj-tag">LangGraph</span><span class="proj-tag">RAG</span>
+        <span class="proj-tag">Azure AI Search</span><span class="proj-tag">Gemini</span>
+        <span class="proj-tag">RabbitMQ</span><span class="proj-tag">DeepEval</span>
+      </div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Invoice Validation Agent with Containerised Deployment</div>
+      <p class="proj-desc">Agentic pipeline that extracts, validates, and flags exceptions in invoice data end-to-end — Azure Document Intelligence for OCR, LangGraph for multi-step reasoning, packaged into Docker images for reproducible deployment.</p>
+      <div class="proj-stack">
+        <span class="proj-tag">LangGraph</span><span class="proj-tag">Azure Doc Intelligence</span>
+        <span class="proj-tag">Docker</span><span class="proj-tag">Python</span>
+        <span class="proj-tag">FastAPI</span>
+      </div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">03</div>
+      <div class="proj-title">6× AI Prototype Cloud Deployments</div>
+      <p class="proj-desc">End-to-end delivery and cloud deployment of six separate AI prototypes — managing CI/CD workflows, Helm chart configurations, and Azure infrastructure provisioning from dev to production.</p>
+      <div class="proj-stack">
+        <span class="proj-tag">CI/CD</span><span class="proj-tag">Helm Charts</span>
+        <span class="proj-tag">Azure Portal</span><span class="proj-tag">Docker</span>
+        <span class="proj-tag">Kubernetes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Certifications</div>
+  <h2 class="sec-title">Credentials</h2>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <span class="cert-icon">🏛️</span>
+      <div>
+        <div class="cert-name">Claude Certified Architect – Foundations (CCA-F)</div>
+        <div class="cert-issuer">Anthropic</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-icon">☁️</span>
+      <div>
+        <div class="cert-name">Professional Machine Learning Engineer</div>
+        <div class="cert-issuer">Google Cloud · 2025</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-icon">🤖</span>
+      <div>
+        <div class="cert-name">Generative AI Leader</div>
+        <div class="cert-issuer">Google Cloud · 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY HIGHLIGHTS -->
+<section class="hl-bg" id="highlights">
+  <div class="section-label">Highlights</div>
+  <h2 class="sec-title">What Sets Me Apart</h2>
+  <div class="hl-grid">
+    <div class="hl-card reveal">
+      <span class="hl-icon">⚡</span>
+      <p>Hands-on builder of agentic AI systems using LangGraph — orchestrating LLM reasoning, tool use and memory across autonomous agent pipelines.</p>
+    </div>
+    <div class="hl-card reveal">
+      <span class="hl-icon">🎓</span>
+      <p>Dual-certified in AI by Anthropic (Claude Certified Architect) and Google Cloud (ML Engineering + Generative AI Leadership).</p>
+    </div>
+    <div class="hl-card reveal">
+      <span class="hl-icon">🔗</span>
+      <p>Worked directly with both leading LLM providers — OpenAI GPT-4 and Anthropic Claude — in production enterprise deployments at Accenture.</p>
+    </div>
+    <div class="hl-card reveal">
+      <span class="hl-icon">🚀</span>
+      <p>Delivered 6+ AI prototypes across document intelligence, marketing automation and financial validation — all using agentic AI architecture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2 class="sec-title">Let's Build Something</h2>
+    <p>Open to Generative AI and Agentic AI engineering roles. Also exploring AI/ML opportunities. Let's connect.</p>
+    <div class="contact-links">
+      <a href="mailto:pamarajuroshini@gmail.com" class="contact-card">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        pamarajuroshini@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/roshini-pamaraju-877a18249/" target="_blank" class="contact-card">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/roshini-pamaraju" target="_blank" class="contact-card">
+        <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 · Roshini Pamaraju · AI/ML Engineer · Chennai, India</p>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal, .exp-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('[data-target]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target;
+    const display = el.dataset.display;
+    if(display){ el.textContent = display; counterObs.unobserve(el); return; }
+    const target = +el.dataset.target;
+    let cur = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = Math.floor(cur) + (el.dataset.suffix === '%' ? '' : '+');
+      if(cur >= target){ el.textContent = target + '+'; clearInterval(timer); }
+    }, 35);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObs.observe(el));
+
+// Focus area bars
+const areas = [
+  { label: 'LangGraph & Multi-Agent Systems', pct: 92 },
+  { label: 'RAG Pipeline Design', pct: 90 },
+  { label: 'Prompt Engineering & LLMOps', pct: 90 },
+  { label: 'FastAPI & LLM Microservices', pct: 83 },
+  { label: 'Azure AI Services', pct: 80 },
+];
+const container = document.getElementById('focus-bars');
+areas.forEach(a => {
+  container.innerHTML += `
+    <div style="margin-bottom:1rem;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:.35rem;">
+        <span style="font-size:.8rem;color:#e8f0f8;">${a.label}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--blue);">${a.pct}%</span>
+      </div>
+      <div style="height:4px;background:rgba(46,134,193,.12);border-radius:2px;overflow:hidden;">
+        <div class="bar-fill" data-pct="${a.pct}" style="height:100%;width:0;background:linear-gradient(90deg,#1B4F72,#2E86C1);border-radius:2px;transition:width 1s cubic-bezier(.22,1,.36,1);"></div>
+      </div>
+    </div>`;
+});
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    document.querySelectorAll('.bar-fill').forEach(b => {
+      b.style.width = b.dataset.pct + '%';
+    });
+    barObs.disconnect();
+  });
+}, { threshold: 0.3 });
+barObs.observe(container);
+
+// Nav active highlight
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--blue-light)' : '';
+  });
+});
+</script>
+</body>
+</html>
